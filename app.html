@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>To-Do List</title>
+    <!-- Annisa Puspitasari -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web">
+    <link rel="stylesheet" href="css/font-awesome.css">
+    <link rel="stylesheet" href="css/style.css">
+    <script language="JavaScript" type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+       <script src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
+    </head>
+<body>
+    <!-- container is start -->
+    <div class="container">
+        <!-- header bg clear date-->
+        <div class="header">
+            <div class="clear">
+                <i class="fa fa-refresh"></i>
+            </div>
+            <div id="date"></div>
+        </div>
+        <!-- header end -->
+        <!-- content addicon input -->
+        <div class="content">
+            <div class="add-to-do">
+                <input type="text" id="input" style="color: white" placeholder="Add a Quick To-do List here">
+            </div>
+        <!-- add-to-do end -->
+        <!-- output listing to do -->
+            <ul id="list">
+            </ul>
+        </div>
+        <!-- content end -->
+        <!-- notepad start -->
+        <div class="notepad" onload="load_text()">
+            <div class="bar" style="padding: 15px;border-left: 2px solid white; background:#FF006E; color: white;border-top: 2px dashed white;height: 17px; ">
+                <input type="button" value="B" style="font-weight: bold; width: 26px; height: 25px" size="28" onclick="bold_click()">
+                <input type="button" value="i" style="width: 25px; font-style: italic; height: 25px" size="30" onclick="italic_click()">
+                <input style="width: 26px; height: 25px; text-decoration: underline" type="button" size="8" value="U" onclick="underline_click()">
+                <input style="width: 26px; height: 25px;" type="button" size="8" value="n" onclick="normal_click()">
+                <input type="reset" style="width: 50px; height: 25px;" value="clear" onclick="load_text()">
+                <select style="border: 1px solid lightgrey;
+    border-radius: 3px;
+    padding: 3px;
+    margin-top: -1px;" class="look" name="" id="" onchange="changeFont(this)">
+                    <option value="Arial">Arial</option>
+                    <option value="Serif">Serif</option>
+                    <option value="Sans Serif">Sans Serif</option>
+                    <option value="Helvetica">Helvetica</option>
+                    <option value="Georgia">Georgia</option>
+                    <option value="Times New Roman">Times New Roman</option>
+                    <option value="Verdana">Verdana</option>
+                    <option value="Courier New">Courier New</option>
+                    <option value="Lucida Console">Lucida Console</option>
+                </select>
+
+                <select name="" style="border: 1px solid lightgrey;
+    border-radius: 3px;
+    padding: 3px;
+    margin-top: -1px;" class="size" id="" onchange="changeSize(this)">
+                    <option value="15">15</option>
+                    <option value="18">18</option>
+                    <option value="20">20</option>
+                    <option value="23">23</option>
+                    <option value="25">25</option>
+                    <option value="27">27</option>
+                    <option value="30">30</option>
+
+                </select>
+            </div>
+
+            <!-- form -->
+                <form name="controls" id="controls">
+                <!-- start to make a textarea for the output -->
+                <textarea style="width: 500px; height: 480px;outline: none;padding:10px;border-left: 1px solid #ff006e;border-right: 1px solid #ff006e;border-bottom: 40px solid #ff006e" id="inputTextToSave" name="inputTextToSave" rows="9" wrap="virtual" cols=48></textarea><br>
+                <!-- textarea stopped -->
+                <span style="margin-top: -37px;position: absolute;margin-left: 20px;color: white">Filename to Save As:</span>
+                <input id="inputFileNameToSaveAs" style="border: 1px solid lightgrey;
+    border-radius: 3px;
+    padding: 3px;
+    margin-top: -1px;margin-top: -35px;position: absolute;margin-left: 190px;"></input>
+                <button style="position: absolute;margin-top: -40px;margin-left: 400px;box-shadow:inset 0px 1px 0px 0px #fbafe3;
+    background:linear-gradient(to bottom, #ff5bb0 5%, #ef027d 100%);
+    background-color:#ff5bb0;
+    border-radius:6px;
+    border:1px solid #ee1eb5;
+    display:inline-block;
+    cursor:pointer;
+    width: 100px;
+    text-align: center;
+    color:#ffffff;
+    font-family:Arial;
+    font-size:15px;
+    font-weight:bold;
+    padding:6px 24px;
+    text-decoration:none;
+    text-shadow:0px 1px 0px #c70067;" onclick="saveTextAsFile()" type="button">Save</button>
+              </form>
+            <!-- end form -->
+        </div>
+        <!-- end notepad -->
+        <!-- start pomodoro -->
+        <div class="pomodoro" style="background: white">
+            <div class="bar" style="padding: 15px;border-left: 2px solid white; background:#FF006E; color: white;border-top: 2px dashed white;height: 17px; ">
+            <input style="margin-top: -10px" type="text" id="pomodoro-clock-task" placeholder="Enter your task..." />
+            </div>
+            <!-- pomodoro clock -->
+             <div id="pomodoro-app" style="background: white">
+              <div id="constain">
+                <div id="timer">
+                  <div id="time">
+                    <span id="minutes">25</span>
+                    <span id="colon">:</span>
+                    <span id="seconds">00</span>
+                  </div>
+                  <div id="filler"></div>
+                </div>
+
+                <div id="buttons">
+                  <button id="work">Work</button>
+                  <button id="shortBreak">Short Break</button>
+                  <button id="longBreak">Long Break</button>
+                  <button id="stop">Stop</button>
+                </div>
+              </div>
+            </div>
+            <!-- end pomodoro clock -->
+        </div>
+        <!-- pomodoro end -->
+    </div>
+    <!-- container is end -->
+    <script src="js/app.js"></script>
+    <script>
+        function load_text() {
+          document.getElementById("inputTextToSave").value = "";
+        }
+        function bold_click() {
+          document.getElementById("inputTextToSave").style.fontWeight = "bold";
+        }
+        function underline_click() {
+          document.getElementById("inputTextToSave").style.textDecoration = "underline";
+        }
+        function italic_click() {
+          document.getElementById("inputTextToSave").style.fontStyle = "italic";
+        }
+        function normal_click() {
+          document.getElementById("inputTextToSave").style.fontStyle = "normal";
+          document.getElementById("inputTextToSave").style.textDecoration = "none";
+          document.getElementById("inputTextToSave").style.fontWeight = "normal";
+        }
+        function changeFont(font){
+            document.getElementById('inputTextToSave').style.fontFamily=font.value;
+        }
+        function changeSize(n){
+            document.getElementById('inputTextToSave').style.fontSize=n.value+'px';
+        }
+
+        // notepad savee to txt
+        function saveTextAsFile()
+{
+    var textToSave = document.getElementById("inputTextToSave").value;
+    var textToSaveAsBlob = new Blob([textToSave], {type:"text/plain"});
+    var textToSaveAsURL = window.URL.createObjectURL(textToSaveAsBlob);
+    var fileNameToSaveAs = document.getElementById("inputFileNameToSaveAs").value;
+ 
+    var downloadLink = document.createElement("a");
+    downloadLink.download = fileNameToSaveAs;
+    downloadLink.innerHTML = "Download File";
+    downloadLink.href = textToSaveAsURL;
+    downloadLink.onclick = destroyClickedElement;
+    downloadLink.style.display = "none";
+    document.body.appendChild(downloadLink);
+ 
+    downloadLink.click();
+}
+ 
+function destroyClickedElement(event)
+{
+    document.body.removeChild(event.target);
+}
+ 
+    </script>
+</body>
+</html>
